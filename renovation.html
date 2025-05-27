@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Renovation Projects | 00.01 Studio</title>
+  <link rel="icon" href="logo1.png" type="image/png">
+  <!-- Обновлённый шрифт Montserrat Alternates -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    main {
+      margin-left: calc(10vw + 250px + 20px);
+      padding: 40px;
+      color: #F0E4D5;
+      text-align: left;
+    }
+    h1 {
+      text-align: left;
+      margin-bottom: 40px;
+      font-family: 'Montserrat Alternates', sans-serif;
+      font-weight: 400;
+    }
+    .full-image, .row {
+      max-width: 1200px;
+      margin: 20px auto;
+      text-align: left;
+    }
+    .full-image img, .row img {
+      width: 70%;
+      height: auto;
+      cursor: pointer;
+      transition: transform 0.3s ease-in-out;
+      display: block;
+    }
+    .full-image img:hover, .row img:hover {
+      transform: scale(1.02);
+    }
+    .text-block {
+      font-size: 1.2em;
+      line-height: 1.6;
+      padding: 10px;
+      text-align: left;
+      color: #F0E4D5;
+      border-left: 2px solid #F0E4D5;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="logo">
+      <a href="index.html"><img src="logo.png" alt="00.01 Studio"></a>
+    </div>
+    <div class="hamburger">&#9776;</div>
+    <nav class="menu">
+      <ul>
+        <li><a href="index.html">home</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle">projects</a>
+          <ul class="dropdown-content">
+            <li><a href="interior.html">interior</a></li>
+            <li><a href="renovation.html">renovation</a></li>
+            <li><a href="exterior.html">exterior</a></li>
+          </ul>
+        </li>
+        <li><a href="about.html">about</a></li>
+        <li><a href="contact.html">contact</a></li>
+      </ul>
+    </nav>
+  </div>
+  <main>
+    <h1>Renovation & Transformation</h1>
+    <section class="full-image">
+      <a href="#" class="carousel-trigger" data-project="1">
+        <img src="renovation1.jpg" alt="Renovation Project 1">
+      </a>
+    </section>
+    <section class="text-block">
+      <p>Renovation breathes new life into forgotten details, creating elegant balance.</p>
+    </section>
+    <section class="full-image">
+      <a href="#" class="carousel-trigger" data-project="2">
+        <img src="renovation2.jpg" alt="Renovation Project 2">
+      </a>
+    </section>
+    <section class="text-block">
+      <p>Every renovation tells a story, where resilience meets creativity.</p>
+    </section>
+    <section class="full-image">
+      <a href="#" class="carousel-trigger" data-project="3">
+        <img src="renovation3.jpg" alt="Renovation Project 3">
+      </a>
+    </section>
+  </main>
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <span class="carousel-nav left">&#10094;</span>
+      <img id="modal-image" src="" alt="Carousel Image">
+      <span class="carousel-nav right">&#10095;</span>
+    </div>
+  </div>
+  <script>
+    var carouselImages = {
+      1: ["renovation1.jpg", "renovation1_2.jpg", "renovation1_3.jpg"],
+      2: ["renovation2.jpg", "renovation2_2.jpg", "renovation2_3.jpg"],
+      3: ["renovation3.jpg", "renovation3_2.jpg", "renovation3_3.jpg"]
+    };
+    var currentProject = null, currentIndex = 0;
+    function openModal(project, index) {
+      currentProject = project;
+      currentIndex = index;
+      var modal = document.getElementById("modal");
+      document.getElementById("modal-image").src = carouselImages[project][index];
+      modal.style.display = "flex";
+    }
+    function closeModal() {
+      document.getElementById("modal").style.display = "none";
+    }
+    function showNext() {
+      if (currentProject !== null) {
+        currentIndex = (currentIndex + 1) % carouselImages[currentProject].length;
+        document.getElementById("modal-image").src = carouselImages[currentProject][currentIndex];
+      }
+    }
+    function showPrev() {
+      if (currentProject !== null) {
+        currentIndex = (currentIndex - 1 + carouselImages[currentProject].length) % carouselImages[currentProject].length;
+        document.getElementById("modal-image").src = carouselImages[currentProject][currentIndex];
+      }
+    }
+    document.addEventListener("DOMContentLoaded", function() {
+      document.querySelectorAll(".carousel-trigger").forEach(function(trigger) {
+        trigger.addEventListener("click", function(e) {
+          e.preventDefault();
+          openModal(this.getAttribute("data-project"), 0);
+        });
+      });
+      document.querySelector(".close-modal").addEventListener("click", closeModal);
+      document.querySelector(".carousel-nav.left").addEventListener("click", showPrev);
+      document.querySelector(".carousel-nav.right").addEventListener("click", showNext);
+      document.getElementById("modal").addEventListener("click", function(e) {
+        if (e.target === this) closeModal();
+      });
+      var dropdownToggle = document.querySelector(".dropdown-toggle");
+      var dropdown = dropdownToggle.parentElement;
+      dropdownToggle.addEventListener("click", function(e) {
+        e.preventDefault();
+        dropdown.classList.toggle("active");
+      });
+      document.addEventListener("click", function(e) {
+        if (!dropdown.contains(e.target)) {
+          dropdown.classList.remove("active");
+        }
+      });
+      var hamburger = document.querySelector('.hamburger');
+      if (hamburger) {
+        hamburger.addEventListener('click', function() {
+          document.querySelector('.menu').classList.toggle('active');
+        });
+      }
+    });
+  </script>
+</body>
+</html>

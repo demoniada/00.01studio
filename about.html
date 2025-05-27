@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | 00.01 Studio</title>
+  <link rel="icon" href="logo1.png" type="image/png" />
+  <!-- Updated font: Montserrat Alternates -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    main {
+      color: #F0E4D5;
+    }
+    /* Галерея проектов и портреты дизайнеров */
+    .project-gallery,
+    .designer-portraits {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .project-item,
+    .designer {
+      flex: 1 1 calc(50% - 20px);
+    }
+    .project-item img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      display: block;
+    }
+    /* Обеспечиваем, чтобы изображения дизайнеров имели фиксированную высоту 
+       и показывали верхнюю часть фотографии */
+    .designer-portraits .designer img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="logo">
+      <a href="index.html">
+        <img src="logo.png" alt="00.01 Studio" />
+      </a>
+    </div>
+    <div class="hamburger">&#9776;</div>
+    <nav class="menu">
+      <ul>
+        <li><a href="index.html">home</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle">projects</a>
+          <ul class="dropdown-content">
+            <li><a href="interior.html">interior</a></li>
+            <li><a href="renovation.html">renovation</a></li>
+            <li><a href="exterior.html">exterior</a></li>
+          </ul>
+        </li>
+        <li><a href="about.html">about</a></li>
+        <li><a href="contact.html">contact</a></li>
+      </ul>
+    </nav>
+  </div>
+  <main>
+    <h1>About 00.01 Studio</h1>
+    <p>
+      00.01 Studio is a creative hub where innovative design meets artisanal craftsmanship.
+      Based on a philosophy that minimalism can be both modern and elegant, our studio transforms everyday spaces into extraordinary environments.
+      We focus on creating interiors and exteriors that captivate the beholder while ensuring supreme functionality in every project.
+    </p>
+    <p>
+      Our team is composed of seasoned designers, visionary artists, and skilled craftsmen who work in perfect harmony.
+      By challenging conventional design norms, we seamlessly blend form with function, producing spaces that are both aesthetically striking and highly practical.
+      Whether it’s reimagining a residence, executing a major renovation, or designing a captivating facade, our commitment to detail is unwavering.
+    </p>
+    <p>
+      Creativity flows through every step of our process at 00.01 Studio.
+      We continuously explore innovative materials, emerging trends, and cutting-edge techniques to ensure that each project is both timely and timeless.
+      Our personalized approach allows us to craft solutions that resonate uniquely with our clients, making their visions a reality.
+    </p>
+    <p>
+      We invite you to peruse our diverse portfolio, where every project tells its own distinct story.
+      Discover how our dedication to quality and precision transforms spaces into experiences that are both visually and functionally exceptional.
+      Let us collaborate in redefining your surroundings, creating a space that inspires and endures.
+    </p>
+    <p>
+      Our passion for innovation, sustainability, and aesthetic excellence drives everything we do.
+      Together, we can create environments that are as captivating as they are practical, leaving a lasting impression on all who experience them.
+    </p>
+    <div class="project-gallery">
+      <div class="project-item">
+        <img src="project1.jpg" alt="Project 1" />
+      </div>
+      <div class="project-item">
+        <img src="project2.jpg" alt="Project 2" />
+      </div>
+    </div>
+    <div class="designer-portraits">
+      <div class="designer">
+        <img src="designer-male.png" alt="Male Designer" />
+        <p>Lead Designer</p>
+      </div>
+      <div class="designer">
+        <img src="designer-female.png" alt="Female Designer" />
+        <p>Creative Director</p>
+      </div>
+    </div>
+  </main>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var dropdownToggle = document.querySelector(".dropdown-toggle");
+      var dropdown = dropdownToggle.parentElement;
+      dropdownToggle.addEventListener("click", function (e) {
+        e.preventDefault();
+        dropdown.classList.toggle("active");
+      });
+      document.addEventListener("click", function (e) {
+        if (!dropdown.contains(e.target)) {
+          dropdown.classList.remove("active");
+        }
+      });
+      var hamburger = document.querySelector(".hamburger");
+      if (hamburger) {
+        hamburger.addEventListener("click", function () {
+          document.querySelector(".menu").classList.toggle("active");
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact | 00.01 Studio</title>
+    <link rel="icon" href="logo1.png" type="image/png" />
+    <!-- Обновлённый шрифт Montserrat Alternates -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      body.contact {
+        background-color: #33312F;
+        background-image: none;
+        font-family: 'Montserrat Alternates', sans-serif;
+        color: #F0E4D5;
+      }
+      main {
+        margin-left: calc(10vw + 250px + 20px);
+        padding: 40px;
+        color: #F0E4D5;
+      }
+      .contact-form-container {
+        max-width: 600px;
+        margin: 20px 0;
+        padding: 0 20px;
+        text-align: left;
+      }
+      .contact-form {
+        background: rgba(46, 45, 41, 0.7);
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        color: #F0E4D5;
+      }
+      .contact-form input,
+      .contact-form textarea {
+        width: 80%;
+        display: block;
+        margin: 0 auto 15px;
+        padding: 10px;
+        border: none;
+        border-radius: 3px;
+        text-align: left;
+        font-family: 'Montserrat Alternates', sans-serif;
+      }
+      .contact-form button {
+        background: #c9a978;
+        color: #2e2d29;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 1em;
+        display: block;
+        margin-left: auto;
+        margin-right: 0;
+        font-family: 'Montserrat Alternates', sans-serif;
+      }
+      .contact-form button:hover {
+        background: #fff;
+      }
+      .contact-overlay {
+        background: rgba(46, 45, 41, 0.7);
+        padding: 20px;
+        border-radius: 5px;
+        margin-top: 20px;
+        color: #F0E4D5;
+        font-family: 'Montserrat Alternates', sans-serif;
+      }
+      .contact-overlay h2 {
+        margin: 0 0 10px;
+        font-size: 1.2em;
+      }
+      .contact-overlay ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .contact-overlay li {
+        margin: 5px 0;
+      }
+      .contact-overlay a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .contact-overlay a:hover {
+        color: inherit;
+      }
+      .contact-info {
+        display: none;
+      }
+    </style>
+  </head>
+  <body class="contact">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="logo">
+        <a href="index.html">
+          <img src="logo.png" alt="00.01 Studio" />
+        </a>
+      </div>
+      <!-- Гамбургер (активен только на мобильных устройствах) -->
+      <div class="hamburger">&#9776;</div>
+      <nav class="menu">
+        <ul>
+          <li><a href="index.html">home</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle">projects</a>
+            <ul class="dropdown-content">
+              <li><a href="interior.html">interior</a></li>
+              <li><a href="renovation.html">renovation</a></li>
+              <li><a href="exterior.html">exterior</a></li>
+            </ul>
+          </li>
+          <li><a href="about.html">about</a></li>
+          <li><a href="contact.html">contact</a></li>
+        </ul>
+      </nav>
+    </div>
+    <!-- Main Content -->
+    <main>
+      <h1>Contact Us</h1>
+      <div class="contact-form-container">
+        <form
+          action="mailto:info@00-01studio.com"
+          method="post"
+          enctype="text/plain"
+          class="contact-form"
+        >
+          <input type="text" id="name" name="name" placeholder="Name" required />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email"
+            required
+          />
+          <input
+            type="text"
+            id="subject"
+            name="subject"
+            placeholder="Subject"
+            required
+          />
+          <textarea
+            id="message"
+            name="message"
+            rows="6"
+            placeholder="Message"
+            required
+          ></textarea>
+          <button type="submit">Send</button>
+        </form>
+        <div class="contact-overlay">
+          <h2>Our Contacts</h2>
+          <ul>
+            <li>Email: info@00-01studio.com</li>
+            <li>Phone: +1 234 567 890</li>
+            <li>Address: 123 Design Street, Creativity City, Country</li>
+            <li>
+              Instagram:
+              <a href="https://www.instagram.com/00-01studio" target="_blank"
+                >@00.01studio</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </main>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var dropdownToggle = document.querySelector(".dropdown-toggle");
+        var dropdown = dropdownToggle.parentElement;
+        dropdownToggle.addEventListener("click", function (e) {
+          e.preventDefault();
+          dropdown.classList.toggle("active");
+        });
+        document.addEventListener("click", function (e) {
+          if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove("active");
+          }
+        });
+        var hamburger = document.querySelector(".hamburger");
+        if (hamburger) {
+          hamburger.addEventListener("click", function () {
+            document.querySelector(".menu").classList.toggle("active");
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

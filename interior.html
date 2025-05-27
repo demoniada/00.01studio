@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interior Projects | 00.01 Studio</title>
+  <link rel="icon" href="logo1.png" type="image/png">
+  <!-- Обновлённый шрифт Montserrat Alternates -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    main {
+      margin-left: calc(10vw + 250px + 20px);
+      padding: 40px;
+      color: #F0E4D5;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .intro-quote {
+      max-width: 800px;
+      margin: 0 auto 20px;
+      text-align: center;
+      font-size: 1.4em;
+      line-height: 1.5;
+    }
+    .full-image {
+      max-width: 1200px;
+      margin: 20px auto;
+      text-align: center;
+    }
+    .full-image img {
+      width: 100%;
+      height: auto;
+      cursor: pointer;
+      transition: transform 0.3s ease-in-out;
+    }
+    .full-image img:hover {
+      transform: scale(1.02);
+    }
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 1200px;
+      margin: 40px auto;
+      gap: 20px;
+    }
+    .row > .left-col,
+    .row > .right-col {
+      flex: 1;
+    }
+    .text-block {
+      font-size: 1.2em;
+      line-height: 1.6;
+      padding: 20px;
+      border-left: 2px solid rgba(240, 228, 213, 0.3);
+      color: #F0E4D5;
+    }
+    .row a, .full-image a {
+      display: block;
+    }
+    .row img {
+      width: 100%;
+      height: auto;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .row img:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="logo">
+      <a href="index.html"><img src="logo.png" alt="00.01 Studio"></a>
+    </div>
+    <div class="hamburger">&#9776;</div>
+    <nav class="menu">
+      <ul>
+        <li><a href="index.html">home</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle">projects</a>
+          <ul class="dropdown-content">
+            <li><a href="interior.html">interior</a></li>
+            <li><a href="renovation.html">renovation</a></li>
+            <li><a href="exterior.html">exterior</a></li>
+          </ul>
+        </li>
+        <li><a href="about.html">about</a></li>
+        <li><a href="contact.html">contact</a></li>
+      </ul>
+    </nav>
+  </div>
+  <main>
+    <section class="intro-quote">
+      <p>“Design is not just what it looks like and feels like. Design is how it works.” — Steve Jobs</p>
+    </section>
+    <section class="full-image">
+      <a href="#" class="carousel-trigger" data-project="1">
+        <img src="interior1.jpg" alt="Interior Project 1">
+      </a>
+    </section>
+    <section class="row">
+      <div class="left-col">
+        <div class="text-block">
+          <p>“A room should never allow the eye to settle in one place. It should smile at you and create fantasy.” — Juan Montoya</p>
+        </div>
+      </div>
+      <div class="right-col">
+        <a href="#" class="carousel-trigger" data-project="2">
+          <img src="texture.jpg" alt="Texture Detail">
+        </a>
+      </div>
+    </section>
+    <section class="row">
+      <div class="left-col">
+        <a href="#" class="carousel-trigger" data-project="3">
+          <img src="interior3.jpg" alt="Interior Project 3">
+        </a>
+      </div>
+      <div class="right-col">
+        <div class="text-block">
+          <p>“The details are not the details. They make the design.” — Charles Eames</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var dropdownToggle = document.querySelector(".dropdown-toggle");
+      var dropdown = dropdownToggle.parentElement;
+      dropdownToggle.addEventListener("click", function(e) {
+        e.preventDefault();
+        dropdown.classList.toggle("active");
+      });
+      document.addEventListener("click", function(e) {
+        if (!dropdown.contains(e.target)) {
+          dropdown.classList.remove("active");
+        }
+      });
+      var hamburger = document.querySelector('.hamburger');
+      if (hamburger) {
+        hamburger.addEventListener('click', function() {
+          document.querySelector('.menu').classList.toggle('active');
+        });
+      }
+    });
+  </script>
+</body>
+</html>
