@@ -5,41 +5,311 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projects | 00.01 Studio</title>
   <link rel="icon" href="logo1.png" type="image/png">
-  <!-- Обновлённый шрифт Montserrat Alternates -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
   <style>
-    main {
+    /* === Глобальные стили === */
+    body {
+      font-family: 'Montserrat Alternates', sans-serif;
+      margin: 0;
+      padding: 0;
       color: #F0E4D5;
+      background-color: #33312F;
     }
-    .project-gallery, .designer-portraits {
-      display: flex;
-      flex-wrap: wrap;
+
+    body.home {
+      background-color: #33312F;
+    }
+
+    body:not(.home) {
+      background-color: #33312F;
+      background-attachment: fixed;
+    }
+
+    /* === Сайдбар === */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 10vw;
+      width: 250px;
+      height: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    /* === Логотип === */
+    .logo {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .logo img {
+      height: 25px;
+    }
+
+    /* === Меню и подменю === */
+    .menu {
+      position: relative;
+    }
+
+    .menu ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .menu li {
+      margin-bottom: 20px;
+    }
+
+    .menu li a {
+      text-decoration: none;
+      color: #F0E4D5;
+      font-weight: 400;
+      font-size: 0.9em;
+      transition: color 0.3s;
+    }
+
+    .menu li a:hover {
+      color: #fff;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+        .dropdown > a {
+      pointer-events: auto;
+    }
+
+       .dropdown-content {
+      display: none;
+      position: absolute;
+      background: rgba(46, 45, 41, 0);
+      list-style: none;
+      padding: 10px;
+      z-index: 100;
+      left: 30%; 
+      top: 100%;
+      width: 180px;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-content li {
+      padding: 5px 10px;
+    }
+
+    .dropdown-content li a {
+      text-decoration: none;
+      color: #F0E4D5;
+      transition: color 0.3s;
+    }
+
+    .dropdown-content li a:hover {
+      color: #fff;
+    }
+
+    /* === Вертикальное центрирование меню для десктопа === */
+    @media (min-width: 769px) {
+      .sidebar nav.menu {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        transform: translate(50%, -50%);
+        text-align: left;
+      }
+    }
+
+    /* === Адаптивные стили для мобильных устройств === */
+    @media (max-width: 768px) {
+      .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        padding: 10px;
+        text-align: center;
+      }
+
+      .hamburger {
+        display: block;
+        cursor: pointer;
+        font-size: 24px;
+        color: #F0E4D5;
+        margin: 10px;
+      }
+
+      .menu {
+        display: none;
+      }
+
+      .menu.active {
+        display: block;
+        width: 100%;
+        background-color: #33312F;
+        padding: 10px 0;
+      }
+
+      .menu ul {
+        display: block;
+      }
+
+      .menu li {
+        margin-bottom: 10px;
+      }
+
+      main {
+        margin-left: 0;
+        padding: 20px;
+      }
+    }
+
+    /* Для экранов больше 768px: скрываем гамбургер */
+    @media (min-width: 769px) {
+      .hamburger {
+        display: none;
+      }
+    }
+
+    /* === Основной контент === */
+    main {
+      margin-left: calc(10vw + 250px + 20px);
+      padding: 40px;
+    }
+
+    /* === Сетка проектов === */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
-      justify-content: center;
       margin-top: 20px;
     }
-    .project-item, .designer {
-      flex: 1 1 calc(50% - 20px);
+
+    .project-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      /* Квадратный контейнер */
+      aspect-ratio: 1/1;
     }
-    .project-item img, .designer img {
+
+    .project-item img {
       width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .project-item:hover img {
+      transform: scale(1.05);
+    }
+
+    /* === Оверлей (название проекта) === */
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(51, 49, 47, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .project-item:hover .overlay {
+      opacity: 1;
+    }
+
+    .overlay p {
+      margin: 0;
+      font-size: 1.2em;
+      text-align: center;
+      color: #fff;
+      font-weight: normal;
+    }
+
+    /* === Модальное окно и карусель === */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+    }
+
+    .modal-content img {
+      max-width: 100%;
+      max-height: 90vh;
+      width: auto;
       height: auto;
       display: block;
+      margin: 0 auto;
+      object-fit: contain;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+      user-select: none;
+      z-index: 1010;
+    }
+
+    .carousel-nav {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 50%;
+      color: #fff;
+      font-size: 48px;
+      cursor: pointer;
+      user-select: none;
+      z-index: 1010;
+      opacity: 0;
+    }
+
+    .carousel-nav.left {
+      left: 0;
+    }
+
+    .carousel-nav.right {
+      right: 0;
     }
   </style>
 </head>
 <body>
+  <!-- Сайдбар -->
   <div class="sidebar">
     <div class="logo">
-      <a href="index.html"><img src="logo.png" alt="00.01 Studio"></a>
+      <a href="index.html">
+        <img src="logo.png" alt="00.01 Studio">
+      </a>
     </div>
     <div class="hamburger">&#9776;</div>
     <nav class="menu">
       <ul>
         <li><a href="index.html">home</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle">projects</a>
+          <a href="projects.html" class="dropdown-toggle">projects</a>
           <ul class="dropdown-content">
             <li><a href="interior.html">interior</a></li>
             <li><a href="renovation.html">renovation</a></li>
@@ -51,45 +321,47 @@
       </ul>
     </nav>
   </div>
+
   <!-- Основной контент -->
   <main>
-    <h1>Projects</h1>
-    <p>00.01 Studio is a creative space merging modern minimalism with innovative aesthetics.</p>
-    <div class="project-gallery">
-      <div class="project-item"><img src="project1.jpg" alt="Project 1"></div>
-      <div class="project-item"><img src="project2.jpg" alt="Project 2"></div>
-    </div>
-    <div class="designer-portraits">
-      <div class="designer">
-        <img src="designer-male.png" alt="Male Designer">
-        <p>Lead Designer</p>
-      </div>
-      <div class="designer">
-        <img src="designer-female.png" alt="Female Designer">
-        <p>Creative Director</p>
-      </div>
+    <div class="project-grid">
+      <a href="project1.html" class="project-item">
+        <img src="project1.jpg" alt="Project 1">
+        <div class="overlay"><p>Project 1</p></div>
+      </a>
+      <a href="project2.html" class="project-item">
+        <img src="project2.jpg" alt="Project 2">
+        <div class="overlay"><p>Project 2</p></div>
+      </a>
+      <a href="project3.html" class="project-item">
+        <img src="project3.jpg" alt="Project 3">
+        <div class="overlay"><p>Project 3</p></div>
+      </a>
+      <a href="project4.html" class="project-item">
+        <img src="project4.jpg" alt="Project 4">
+        <div class="overlay"><p>Project 4</p></div>
+      </a>
+      <a href="project5.html" class="project-item">
+        <img src="project5.jpg" alt="Project 5">
+        <div class="overlay"><p>Project 5</p></div>
+      </a>
+      <a href="project6.html" class="project-item">
+        <img src="project6.jpg" alt="Project 6">
+        <div class="overlay"><p>Project 6</p></div>
+      </a>
+      <a href="project7.html" class="project-item">
+        <img src="project7.jpg" alt="Project 7">
+        <div class="overlay"><p>Project 7</p></div>
+      </a>
+      <a href="project8.html" class="project-item">
+        <img src="project8.jpg" alt="Project 8">
+        <div class="overlay"><p>Project 8</p></div>
+      </a>
+      <a href="project9.html" class="project-item">
+        <img src="project9.jpg" alt="Project 9">
+        <div class="overlay"><p>Project 9</p></div>
+      </a>
     </div>
   </main>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      var dropdownToggle = document.querySelector(".dropdown-toggle");
-      var dropdown = dropdownToggle.parentElement;
-      dropdownToggle.addEventListener("click", function(e) {
-        e.preventDefault();
-        dropdown.classList.toggle("active");
-      });
-      document.addEventListener("click", function(e) {
-        if (!dropdown.contains(e.target)) {
-          dropdown.classList.remove("active");
-        }
-      });
-      var hamburger = document.querySelector('.hamburger');
-      if (hamburger) {
-        hamburger.addEventListener('click', function () {
-          document.querySelector('.menu').classList.toggle('active');
-        });
-      }
-    });
-  </script>
 </body>
 </html>
