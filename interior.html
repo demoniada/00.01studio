@@ -5,77 +5,128 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Interior Projects | 00.01 Studio</title>
   <link rel="icon" href="logo1.png" type="image/png">
-  <!-- Обновлённый шрифт Montserrat Alternates -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>
-    main {
-      margin-left: calc(10vw + 250px + 20px);
-      padding: 40px;
+    /* Основные стили страницы */
+    body {
+      background-color: #33312F;
       color: #F0E4D5;
-    }
-    h1 {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    .intro-quote {
-      max-width: 800px;
-      margin: 0 auto 20px;
-      text-align: center;
-      font-size: 1.4em;
-      line-height: 1.5;
-    }
-    .full-image {
-      max-width: 1200px;
-      margin: 20px auto;
-      text-align: center;
-    }
-    .full-image img {
-      width: 100%;
-      height: auto;
-      cursor: pointer;
-      transition: transform 0.3s ease-in-out;
-    }
-    .full-image img:hover {
-      transform: scale(1.02);
-    }
-    .row {
+      font-family: 'Montserrat Alternates', sans-serif;
       display: flex;
       align-items: center;
       justify-content: center;
-      max-width: 1200px;
-      margin: 40px auto;
-      gap: 20px;
+      height: 100vh;
+      margin: 0;
     }
-    .row > .left-col,
-    .row > .right-col {
-      flex: 1;
-    }
-    .text-block {
-      font-size: 1.2em;
-      line-height: 1.6;
-      padding: 20px;
-      border-left: 2px solid rgba(240, 228, 213, 0.3);
+    .sidebar, a {
       color: #F0E4D5;
     }
-    .row a, .full-image a {
-      display: block;
+    .content {
+      display: flex;
+      align-items: center;
+      margin-left: calc(10vw + 250px + 20px);
     }
-    .row img {
+    .media-container {
+      width: 384px;
+      height: 480px;
+    }
+    .media-container video,
+    .media-container img {
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: cover;
       cursor: pointer;
-      transition: transform 0.3s ease;
     }
-    .row img:hover {
-      transform: scale(1.05);
+    
+    /* Модальное окно с каруселью */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 1000;
+    }
+    .modal-content {
+      position: relative;
+      max-width: 80%;
+      max-height: 80%;
+      margin-bottom: 2em;
+    }
+    .modal-content img {
+      width: 75%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      margin: 0 auto;
+      cursor: pointer; /* Добавлен указатель для клика */
+    }
+    .close-modal {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+      user-select: none;
+      z-index: 1010;
+    }
+    .carousel-nav {
+      position: absolute;
+      top: 50%;
+      width: 50px;
+      height: 50px;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+      user-select: none;
+      z-index: 1010;
+      background: rgba(255, 255, 255, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transform: translateY(-50%);
+    }
+    .carousel-nav.left {
+      left: 10px;
+    }
+    .carousel-nav.right {
+      right: 10px;
+    }
+    
+    /* Контейнер миниатюр – offset сверху */
+    .thumbnail-container {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      margin-top: 5vh;
+    }
+    .thumbnail {
+      width: 60px;
+      height: 40px;
+      cursor: pointer;
+      object-fit: cover;
+      border: 2px solid transparent;
+    }
+    .thumbnail.active {
+      border: 2px solid #F0E4D5;
     }
   </style>
 </head>
-<body>
+<body class="home">
+  <!-- Сайдбар -->
   <div class="sidebar">
     <div class="logo">
-      <a href="index.html"><img src="logo.png" alt="00.01 Studio"></a>
+      <a href="index.html">
+        <img src="logo.png" alt="00.01 Studio">
+      </a>
     </div>
     <div class="hamburger">&#9776;</div>
     <nav class="menu">
@@ -94,59 +145,115 @@
       </ul>
     </nav>
   </div>
-  <main>
-    <section class="intro-quote">
-      <p>“Design is not just what it looks like and feels like. Design is how it works.” — Steve Jobs</p>
-    </section>
-    <section class="full-image">
-      <a href="#" class="carousel-trigger" data-project="1">
-        <img src="interior1.jpg" alt="Interior Project 1">
-      </a>
-    </section>
-    <section class="row">
-      <div class="left-col">
-        <div class="text-block">
-          <p>“A room should never allow the eye to settle in one place. It should smile at you and create fantasy.” — Juan Montoya</p>
-        </div>
-      </div>
-      <div class="right-col">
-        <a href="#" class="carousel-trigger" data-project="2">
-          <img src="texture.jpg" alt="Texture Detail">
-        </a>
-      </div>
-    </section>
-    <section class="row">
-      <div class="left-col">
-        <a href="#" class="carousel-trigger" data-project="3">
-          <img src="interior3.jpg" alt="Interior Project 3">
-        </a>
-      </div>
-      <div class="right-col">
-        <div class="text-block">
-          <p>“The details are not the details. They make the design.” — Charles Eames</p>
-        </div>
-      </div>
-    </section>
-  </main>
+  
+  <!-- Основной контент -->
+  <div class="content">
+    <!-- Видео слева -->
+    <div class="media-container">
+      <video autoplay loop muted>
+        <source src="interior-video.mp4" type="video/mp4">
+        Ваш браузер не поддерживает видео.
+      </video>
+    </div>
+    <!-- Изображение справа -->
+    <div class="media-container">
+      <img src="interior1.jpg" alt="Interior Projects" id="openModal" onclick="openModal()">
+    </div>
+  </div>
+  
+  <!-- Модальное окно с каруселью -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal()">&times;</span>
+      <span class="carousel-nav left" onclick="showPrev()">&#10094;</span>
+      <img id="modal-image" src="interior1.jpg" alt="Carousel Image">
+      <span class="carousel-nav right" onclick="showNext()">&#10095;</span>
+    </div>
+    <div class="thumbnail-container">
+      <img class="thumbnail" src="interior1.jpg" onclick="changeImage(0)">
+      <img class="thumbnail" src="interior2.jpg" onclick="changeImage(1)">
+      <img class="thumbnail" src="interior3.jpg" onclick="changeImage(2)">
+      <img class="thumbnail" src="interior4.jpg" onclick="changeImage(3)">
+      <img class="thumbnail" src="interior5.jpg" onclick="changeImage(4)">
+      <img class="thumbnail" src="interior6.jpg" onclick="changeImage(5)">
+      <img class="thumbnail" src="interior7.jpg" onclick="changeImage(6)">
+      <img class="thumbnail" src="interior8.jpg" onclick="changeImage(7)">
+      <img class="thumbnail" src="interior9.jpg" onclick="changeImage(8)">
+      <img class="thumbnail" src="interior10.jpg" onclick="changeImage(9)">
+      <img class="thumbnail" src="interior11.jpg" onclick="changeImage(10)">
+      <img class="thumbnail" src="interior12.jpg" onclick="changeImage(11)">
+      <img class="thumbnail" src="interior13.jpg" onclick="changeImage(12)">
+    </div>
+  </div>
+  
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      var dropdownToggle = document.querySelector(".dropdown-toggle");
-      var dropdown = dropdownToggle.parentElement;
-      dropdownToggle.addEventListener("click", function(e) {
-        e.preventDefault();
-        dropdown.classList.toggle("active");
-      });
-      document.addEventListener("click", function(e) {
-        if (!dropdown.contains(e.target)) {
-          dropdown.classList.remove("active");
+    var images = [
+      "interior1.jpg", "interior2.jpg", "interior3.jpg", "interior4.jpg", "interior5.jpg",
+      "interior6.jpg", "interior7.jpg", "interior8.jpg", "interior9.jpg", "interior10.jpg",
+      "interior11.jpg", "interior12.jpg", "interior13.jpg"
+    ];
+    var currentIndex = 0;
+  
+    function openModal() {
+      document.getElementById("modal").style.display = "flex";
+      updateModalImage();
+      updateThumbnails();
+    }
+  
+    function closeModal() {
+      document.getElementById("modal").style.display = "none";
+    }
+  
+    function showNext() {
+      currentIndex = (currentIndex + 1) % images.length;
+      updateModalImage();
+      updateThumbnails();
+    }
+  
+    function showPrev() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      updateModalImage();
+      updateThumbnails();
+    }
+  
+    function changeImage(index) {
+      currentIndex = index;
+      updateModalImage();
+      updateThumbnails();
+    }
+  
+    function updateModalImage() {
+      document.getElementById("modal-image").src = images[currentIndex];
+    }
+  
+    function updateThumbnails() {
+      var thumbs = document.querySelectorAll('.thumbnail');
+      thumbs.forEach(function(thumb, i) {
+        if (i === currentIndex) {
+          thumb.classList.add("active");
+        } else {
+          thumb.classList.remove("active");
         }
       });
-      var hamburger = document.querySelector('.hamburger');
-      if (hamburger) {
-        hamburger.addEventListener('click', function() {
-          document.querySelector('.menu').classList.toggle('active');
-        });
-      }
+    }
+  
+    document.getElementById("openModal").addEventListener("click", openModal);
+    document.querySelector(".close-modal").addEventListener("click", closeModal);
+    document.querySelector(".carousel-nav.left").addEventListener("click", function(e) {
+      e.stopPropagation();
+      showPrev();
+    });
+    document.querySelector(".carousel-nav.right").addEventListener("click", function(e) {
+      e.stopPropagation();
+      showNext();
+    });
+    // Делает основное изображение кликабельным (переход к следующему слайду)
+    document.getElementById("modal-image").addEventListener("click", function(e) {
+      e.stopPropagation();
+      showNext();
+    });
+    document.getElementById("modal").addEventListener("click", function(e) {
+      if (e.target === this) closeModal();
     });
   </script>
 </body>
