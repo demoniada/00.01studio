@@ -27,8 +27,6 @@ body:not(.home) {
   box-sizing: border-box;
 }
 
-/* Вертикальная линия из сайдбара удалена */
-
 /* === Логотип === */
 .logo {
   text-align: center;
@@ -70,18 +68,22 @@ body:not(.home) {
   position: relative;
 }
 
+/* Исправленные стили подменю */
 .dropdown-content {
   display: none;
   position: absolute;
-  background: rgba(46, 45, 41, 0); /* Прозрачный фон */
+  background: rgba(46, 45, 41, 0); /* Теперь полностью прозрачный */
   list-style: none;
   padding: 10px;
   z-index: 100;
-  left: 27%; /* Подменю теперь смещено на 15% левее от предыдущего значения */
-  top: 0;
+  left: 30%; /* Смещаем вправо на 10% */
+  top: 100%;
   width: 180px;
 }
 
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 
 .dropdown-content li {
   padding: 5px 10px;
@@ -97,11 +99,7 @@ body:not(.home) {
   color: #fff;
 }
 
-.dropdown.active .dropdown-content {
-  display: block;
-}
-
-/* === Вертикальное центрирование меню для десктопа с смещением вправо на 50% === */
+/* === Вертикальное центрирование меню для десктопа === */
 @media (min-width: 769px) {
   .sidebar nav.menu {
     position: absolute;
@@ -115,7 +113,6 @@ body:not(.home) {
 
 /* === Адаптивные стили для мобильных устройств === */
 @media (max-width: 768px) {
-  /* Сайдбар перемещается сверху */
   .sidebar {
     position: static;
     width: 100%;
@@ -123,8 +120,7 @@ body:not(.home) {
     padding: 10px;
     text-align: center;
   }
-  
-  /* Гамбургер для мобильного меню */
+
   .hamburger {
     display: block;
     cursor: pointer;
@@ -132,28 +128,26 @@ body:not(.home) {
     color: #F0E4D5;
     margin: 10px;
   }
-  
-  /* Скрываем меню по умолчанию */
+
   .menu {
     display: none;
   }
-  
-  /* При активном состоянии отображаем меню */
+
   .menu.active {
     display: block;
     width: 100%;
     background-color: #33312F;
     padding: 10px 0;
   }
-  
+
   .menu ul {
     display: block;
   }
-  
+
   .menu li {
     margin-bottom: 10px;
   }
-  
+
   main {
     margin-left: 0;
     padding: 20px;
@@ -224,7 +218,7 @@ main {
   cursor: pointer;
   user-select: none;
   z-index: 1010;
-  opacity: 0; /* Невидимые, но кликабельные */
+  opacity: 0;
 }
 
 .carousel-nav.left {
